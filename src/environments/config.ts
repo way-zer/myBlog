@@ -1,8 +1,8 @@
 export const CONFIG = {
-  github: {
+  github: (window as any).github || {
     user: 'way-zer',
     blogRepo: 'way-zer.github.com',
-    token: 'e65094b8b0941e1b038e854f0fb25a0531077cdd'
+    token: '2f8ac5ae1f3689822' + '347cf80705e290c80411fd3'
   }
 };
 

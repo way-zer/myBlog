@@ -20,6 +20,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (this.dataS.baseData.loading) {
+      this.dataS.baseData.reload();
+    }
     this.autoUnsubscribe.push(this.dataS.userInfo.subscribe(v => {
       this.userInfo = v;
     }));
