@@ -9,7 +9,7 @@ import {UserInfo} from './types/myType';
 import {emptyConnection, Issue2} from './types/github';
 import {NzMessageService} from 'ng-zorro-antd';
 
-const initialData = {login: 'UNKNOWN', followers: emptyConnection, repository: {}} as any;
+const initialData = {login: 'UNKNOWN', followers: emptyConnection, repository: {issues: emptyConnection}} as any;
 const initialIssue: Partial<IssueDetail0> = {
   title: '加载内容中', bodyHTML: '<h2>Wait</h2><h2>Wait</h2><h2>Wait</h2>', comments: emptyConnection
 };
