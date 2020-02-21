@@ -1,0 +1,19 @@
+<a id="back" (click)="back()"><i nz-icon nzType="left-circle" nzTheme="outline"></i></a>
+<title>{{data.data.title}}</title>
+<nz-skeleton [nzLoading]="data.loading">
+  <h1>{{data.data.title}}</h1>
+  <p>Updated at {{data.data.updatedAt| date: 'medium'}}</p>
+  <div id="body" class="markdown-body" [innerHTML]="data.data.bodyHTML"></div>
+  <div id="comments">
+    <nz-list [nzLoading]="data.loading">
+      <ng-container *ngFor="let comment of data.data.comments.nodes">
+        <nz-comment [nzAuthor]="comment.author.login"
+                    [nzDatetime]="'On '+(comment.createdAt|date)+', last updated on '+ (comment.updatedAt|date: 'medium')">
+          <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="comment.author.avatarUrl"></nz-avatar>
+          <nz-comment-content class="comment-body markdown-body" [innerHTML]="comment.bodyHTML"></nz-comment-content>
+        </nz-comment>
+      </ng-container>
+    </nz-list>
+    <a *ngIf="data.data.viewerCanReact" nz-button [href]="data.data.url+'#new_comment_field'" target="_blank">Add Comment</a>
+  </div>
+</nz-skeleton>

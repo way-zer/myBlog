@@ -1,0 +1,33 @@
+#back{
+  position: absolute;
+  margin-right: 350px;
+  right: 50%;
+  top: 70px;
+  font-size: 28px;
+  @media (max-width: 800px){
+    display: none;
+  }
+}
+
+nz-skeleton{
+  text-align: left;
+  padding-top: 70px;
+  @media (max-width: 800px){
+    padding-top: 20px;
+  }
+  >p{
+    font-size: 14px;
+    color: #788590;
+    margin-top: 10px;
+  }
+}
+
+#body{
+  margin-top: 40px;
+}
+
+#comments{
+  >a{
+    text-align: center;
+  }
+}
