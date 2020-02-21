@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {LoadableData} from './types/loadableData';
 import {QueryIssuesService} from './graghql/query-issues.service';
 import {CONFIG} from '../../environments/config';
@@ -9,7 +9,7 @@ import {UserInfo} from './types/myType';
 import {emptyConnection, Issue2} from './types/github';
 import {NzMessageService} from 'ng-zorro-antd';
 
-const initialData = {login: 'UNKNOWN', followers: emptyConnection, repository: {}}as any;
+const initialData = {login: 'UNKNOWN', followers: emptyConnection, repository: {}} as any;
 const initialIssue: Partial<IssueDetail0> = {
   title: '加载内容中', bodyHTML: '<h2>Wait</h2><h2>Wait</h2><h2>Wait</h2>', comments: emptyConnection
 };
@@ -23,18 +23,20 @@ export class DataService {
     private queryIssues: QueryIssuesService,
     private queryIssue: QueryIssueService,
     private message: NzMessageService,
-  ) { }
+  ) {
+  }
+
   public baseData = new LoadableData(initialData, () =>
-    this.queryIssues.fetch(commonVar, {errorPolicy: 'ignore'}).pipe(
-      map(v => v.data),
-      filter(v => !!v),
-      map(v => v.user),
-    ).toPromise().catch(err => {
-      console.error(err);
-      this.message.error('网络错误' + err.message);
-      return Promise.reject();
-    })
-  , false);
+      this.queryIssues.fetch(commonVar, {errorPolicy: 'ignore'}).pipe(
+        map(v => v.data),
+        filter(v => !!v),
+        map(v => v.user),
+      ).toPromise().catch(err => {
+        console.error(err);
+        this.message.error('网络错误' + err.message);
+        return Promise.reject();
+      })
+    , false);
   public userInfo: Observable<UserInfo> = this.baseData.subject.pipe(
     map(({avatarUrl, followers, url, login, repository}) => ({
       name: login, avatarUrl, followers: followers.totalCount, homeUrl: url, blogUrl: repository.url
@@ -47,6 +49,7 @@ export class DataService {
       createdAt, updatedAt, labels: labels.nodes, title, number
     })))
   );
+
   public loadIssue(issueNum: number) {
     return new LoadableData(initialIssue, () =>
       this.queryIssue.fetch({...commonVar, issueNum}, {errorPolicy: 'ignore'}).pipe(
@@ -60,5 +63,6 @@ export class DataService {
       })
     );
   }
+
   // TODO loadMore
 }

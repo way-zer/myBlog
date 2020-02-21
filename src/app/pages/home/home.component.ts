@@ -12,10 +12,12 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit, OnDestroy {
   userInfo: UserInfo = {} as any;
   autoUnsubscribe: Subscription[] = [];
+
   constructor(
     public dataS: DataService,
     private router: Router,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.autoUnsubscribe.push(this.dataS.userInfo.subscribe(v => {

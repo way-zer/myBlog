@@ -11,6 +11,7 @@ export interface Issue {
   updatedAt: string;
   labels: Connection<Label>;
 }
+
 export interface Issue2 {
   title: string;
   number: number;

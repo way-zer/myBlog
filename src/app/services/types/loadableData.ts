@@ -1,14 +1,16 @@
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 export class LoadableData<T> {
   public loading = true;
   public data: T;
   subject: BehaviorSubject<T>;
 
-  public constructor(initial: Partial<T>, private loader: (() => Promise<T>), autoLoad= true) {
+  public constructor(initial: Partial<T>, private loader: (() => Promise<T>), autoLoad = true) {
     this.data = initial as T;
     this.subject = new BehaviorSubject<T>(this.data);
-    if (autoLoad) { this.reload(); }
+    if (autoLoad) {
+      this.reload();
+    }
   }
 
   public reload() {
@@ -25,7 +27,9 @@ export class LoadableData<T> {
   }
 
   public wait(needNew: boolean = false): Promise<T> {
-    if (!needNew && !this.loading) {return Promise.resolve(this.data); }
+    if (!needNew && !this.loading) {
+      return Promise.resolve(this.data);
+    }
     return this.subject.toPromise();
   }
 }

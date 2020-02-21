@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Query} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {Comment, Connection, Issue} from '../types/github';
@@ -27,35 +27,35 @@ interface Params {
 })
 export class QueryIssueService extends Query<Resp, Params> {
   document = gql`
-  query queryIssue($user:String!,$blogRepo:String!,$issueNum: Int!){
-    repository(owner: $user,name: $blogRepo){
-      issue(number: $issueNum){
-        title
-        createdAt
-        updatedAt
-        bodyHTML
-        url
-        viewerCanReact
-        comments(first: 10){
-          nodes{
-            author{
-              login
-              url
-              avatarUrl
+    query queryIssue($user:String!,$blogRepo:String!,$issueNum: Int!){
+      repository(owner: $user,name: $blogRepo){
+        issue(number: $issueNum){
+          title
+          createdAt
+          updatedAt
+          bodyHTML
+          url
+          viewerCanReact
+          comments(first: 10){
+            nodes{
+              author{
+                login
+                url
+                avatarUrl
+              }
+              bodyHTML
+              createdAt
+              updatedAt
             }
-            bodyHTML
-            createdAt
-            updatedAt
+            pageInfo{
+              endCursor
+              hasNextPage
+            }
+            totalCount
           }
-          pageInfo{
-            endCursor
-            hasNextPage
-          }
-          totalCount
         }
       }
     }
-  }
   `;
 }
 

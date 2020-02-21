@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import {Actor, Connection, Issue} from '../types/github';
 
 interface Resp {
-  user: Actor&{
+  user: Actor & {
     followers: Connection<Actor>,
     repository: { url: string, issues: Connection<Issue> },
   };

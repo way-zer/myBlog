@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
-import {ActivatedRoute, Route, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LoadableData} from '../../services/types/loadableData';
 import {IssueDetail0} from '../../services/graghql/query-issue.service';
 
@@ -11,15 +11,19 @@ import {IssueDetail0} from '../../services/graghql/query-issue.service';
 })
 export class PostViewComponent implements OnInit {
   public data: LoadableData<IssueDetail0>;
+
   constructor(
     private dataS: DataService,
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     const id = +this.route.snapshot.params.id;
-    if (!id) {return this.back(); }
+    if (!id) {
+      return this.back();
+    }
     this.data = this.dataS.loadIssue(id);
   }
 
